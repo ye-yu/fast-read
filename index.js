@@ -89,6 +89,8 @@ function clickStartRolling() {
 function clickStopRolling() {
   BUTTONS.STOP.hide();
   BUTTONS.START.show();
+  setScreenText();
+  clearInterval(GLOB.timer);
 }
 
 /*
