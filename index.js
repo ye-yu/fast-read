@@ -152,7 +152,7 @@ function clearHighlightingContent() {
 
 function appendToHighlighting(split) {
   for (let {index, element} of iterate(split)) {
-    element = element.replace(/\s/g, "<br>");
+    element = element.replace(/\n/g, "<br>");
     let word = `<span id="word-${index}">${element}</span>`;
     HIGHLIGHTING.append(word);
   }
