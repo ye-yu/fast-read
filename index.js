@@ -138,6 +138,7 @@ function clickStartRolling() {
   clearHighlightingContent();
   appendToHighlighting(split);
   displayTimer(delay);
+  GLOB.iterator = iterator;
   GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
   BUTTONS.START.hide();
   BUTTONS.PAUSE.fadeIn(200);
@@ -181,6 +182,7 @@ function scheduleWordToScreen(iterator, delay) {
 
   let word = nextWord.value.element;
   addMomentum = ENTRIES.CTRL_MOMENTUM.get() && GLOB.pauseSymbols.indexOf(word[word.length-1]) > -1;
+  GLOB.current = nextWord;
   return setInterval(() => {
     if (nextWord.done) {
       clearTimeout(GLOB.screen);
@@ -215,11 +217,17 @@ function clickStopRolling() {
 function clickPauseRolling() {
   BUTTONS.PAUSE.hide();
   BUTTONS.CONTINUE.show();
+  clearTimeout(GLOB.screen);
 }
 
 function clickContinueRolling() {
   BUTTONS.PAUSE.show();
   BUTTONS.CONTINUE.hide();
+  setScreenText(GLOB.current.value.element);
+  highlightText(GLOB.current.value.index);
+  const wpm = ENTRIES.WPM.getOrDefault();
+  const refreshRate = Math.round((60 * 1000) / wpm);
+  GLOB.screen = scheduleWordToScreen(GLOB.iterator, refreshRate);
 }
 
 /*
