@@ -34,6 +34,12 @@ class IntInput extends TextInput{
   }
 }
 
+function* iterate(arr) {
+  for(let i of arr) {
+    yield i;
+  }
+}
+
 /*
 Constants
 */
@@ -67,18 +73,29 @@ function setScreenText(text = "") {
 }
 
 function clickStartRolling() {
-  if (ENTRIES.TEXT.get().length == 0) return;
+  if (ENTRIES.TEXT.get().trim().length == 0) return;
   console.log("Delay before start: ", ENTRIES.DELAY.getOrDefault());
   console.log("Words per minute: ", ENTRIES.WPM.getOrDefault());
   console.log("Text to play: ", ENTRIES.TEXT.get());
 
   let delay = ENTRIES.DELAY.getOrDefault();
+  const wpm = ENTRIES.WPM.getOrDefault();
+  const refreshRate = Math.round((60 * 1000) / wpm);
+  let iterator = iterate(ENTRIES.TEXT.get().trim().split(/\s+/));
   setScreenText(delay);
   GLOB.timer = setInterval(() => {
     delay -= 1;
     setScreenText(delay);
     if (delay == 0) {
       clearInterval(GLOB.timer);
+      GLOB.timer = setInterval(() => {
+        let nextWord = iterator.next();
+        if (nextWord.done) {
+          clearInterval(GLOB.timer);
+        } else {
+          setScreenText(nextWord.value);
+        }
+      }, refreshRate)
       setScreenText();
     }
   }, 1000);
