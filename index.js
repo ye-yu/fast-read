@@ -3,10 +3,9 @@
 Classes
 */
 class TextInput {
-  constructor(source, defValue, isTextArea) {
+  constructor(source, defValue) {
     this.source = source;
     this.def = defValue;
-    this.isTextArea = isTextArea;
   }
 
   get() {
@@ -22,8 +21,8 @@ class TextInput {
 }
 
 class IntInput extends TextInput{
-  constructor(source, defValue, isTextArea) {
-    super(source, defValue, isTextArea);
+  constructor(source, defValue) {
+    super(source, defValue);
   }
 
   getOrDefault(defVal = this.def) {
@@ -31,6 +30,20 @@ class IntInput extends TextInput{
     if (val.length == 0 || Number.isNaN(val)) val = defVal;
     this.source.val(val);
     return +val;
+  }
+}
+
+class BooleanInput extends TextInput{
+  constructor(source) {
+    super(source, false);
+  }
+
+  get() {
+    return this.source.is(":checked");
+  }
+
+  getOrDefault() {
+    return this.get();
   }
 }
 
@@ -55,7 +68,8 @@ const BUTTONS = {
 const ENTRIES = {
   TEXT: new TextInput($("#input-text"), ""),
   DELAY: new IntInput($("#delay"), "0"),
-  WPM: new IntInput($("#wpm"), "200")
+  WPM: new IntInput($("#wpm"), "200"),
+  BY_CHAR: new BooleanInput($("#char-by-char"))
 }
 
 const GLOB = {}
@@ -69,13 +83,26 @@ function init() {
   BUTTONS.STOP.on('click', clickStopRolling);
   ENTRIES.WPM.source.on('input', () => {
     $("#wpm-display").html(ENTRIES.WPM.get());
+    calculateStatistics();
   });
+  ENTRIES.TEXT.source.on('input', calculateStatistics);
+  ENTRIES.BY_CHAR.source.on('input', calculateStatistics);
 
   // hide stop rolling button
   BUTTONS.STOP.hide();
 
   // display initial word per minute
   $("#wpm-display").html(ENTRIES.WPM.get());
+
+  calculateStatistics();
+}
+
+function calculateStatistics() {
+  const wpm = ENTRIES.WPM.getOrDefault();
+  let wordCount;
+  if (!ENTRIES.BY_CHAR.get()) wordCount = ENTRIES.TEXT.get().trim().split(/\s+/).length;
+  else wordCount = ENTRIES.TEXT.get().trim().split("").length;
+  $("#time-completion").html(`${Math.round(wordCount / wpm * 60)}s`);
 }
 
 function setScreenText(text = "") {
