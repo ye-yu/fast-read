@@ -42,18 +42,8 @@ class BooleanInput extends TextInput{
     return this.source.is(":checked");
   }
 
-  getOrDefault() {
+  getOrDefault(defVal = this.def) {
     return this.get();
-  }
-}
-
-function* iterate(arr) {
-  let count = 0;
-  for(let i of arr) {
-    yield {
-      index: count,
-      element: i
-    };
   }
 }
 
@@ -69,7 +59,8 @@ const ENTRIES = {
   TEXT: new TextInput($("#input-text"), ""),
   DELAY: new IntInput($("#delay"), "0"),
   WPM: new IntInput($("#wpm"), "200"),
-  BY_CHAR: new BooleanInput($("#char-by-char"))
+  BY_CHAR: new BooleanInput($("#char-by-char")),
+  CTRL_MOMENTUM: new BooleanInput($("#control-momentum")),
 }
 
 const GLOB = {}
@@ -95,6 +86,11 @@ function init() {
   $("#wpm-display").html(ENTRIES.WPM.get());
 
   calculateStatistics();
+
+  GLOB.pauseSymbols = [
+    ".", "!", ",", "?", ";", ":", // roman symbols
+    "。", "！", "，", "？", "；", "：" // full-width symbols
+  ];
 }
 
 function calculateStatistics() {
@@ -110,6 +106,16 @@ function setScreenText(text = "&nbsp;") {
   $("#screen").html(text);
 }
 
+function* iterate(arr) {
+  let count = 0;
+  for(let i of arr) {
+    yield {
+      index: count,
+      element: i,
+    };
+  }
+}
+
 function clickStartRolling() {
   if (ENTRIES.TEXT.get().trim().length == 0) return;
   let delay = ENTRIES.DELAY.getOrDefault();
@@ -119,7 +125,7 @@ function clickStartRolling() {
   if ($("#char-by-char").is(":checked")) {
     iterator = iterate(ENTRIES.TEXT.get().trim().split(""));
   } else {
-    iterator = iterate(ENTRIES.TEXT.get().trim().split(/\s+/));
+    iterator = iterate(ENTRIES.TEXT.get().trim().split(/(\s+)/g));
   }
   displayTimer(delay);
   GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
@@ -141,8 +147,16 @@ function displayTimer(delay) {
 }
 
 function scheduleWordToScreen(iterator, delay) {
+  let addMomentum = false;
+  let nextWord = iterator.next();
+  while(nextWord.value.element.trim().length == 0) {
+    nextWord = iterator.next();
+    addMomentum = ENTRIES.CTRL_MOMENTUM.get() && nextWord.value.element.indexOf("\n") > -1;
+  }
+
+  let word = nextWord.value.element;
+  addMomentum = ENTRIES.CTRL_MOMENTUM.get() && GLOB.pauseSymbols.indexOf(word[word.length-1]) > -1;
   return setInterval(() => {
-    let nextWord = iterator.next();
     if (nextWord.done) {
       clearTimeout(GLOB.screen);
     } else {
@@ -150,7 +164,7 @@ function scheduleWordToScreen(iterator, delay) {
       clearTimeout(GLOB.screen);
       const wpm = ENTRIES.WPM.getOrDefault();
       const refreshRate = Math.round((60 * 1000) / wpm);
-      GLOB.screen = scheduleWordToScreen(iterator, refreshRate);
+      GLOB.screen = scheduleWordToScreen(iterator, refreshRate + (addMomentum ? refreshRate : 0));
     }
   }, delay);
 }
