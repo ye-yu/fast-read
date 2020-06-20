@@ -78,10 +78,10 @@
             Paste your text below and click on play to start rolling
             the text.
           </div>
-          <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 my-3 rounded" id="input-text" rows="15"></textarea>
+          <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 my-3 rounded" id="input-text" rows="12"></textarea>
           <div class="container-fluid text-center">
             <div class="row">
-              <div class="col-lg-4 d-flex flex-row align-items-center" style="height:60px;">
+              <div class="col-lg-6 d-flex flex-row align-items-center" style="height:60px;">
                 <div class="">
                   Delay:
                 </div>
@@ -89,7 +89,7 @@
                   <input class="mx-2 my-1" type="number" min="0" placeholder="(in seconds)" name="" value="" id="delay">
                 </div>
               </div>
-              <div class="col-lg-4 d-flex flex-row align-items-center" style="height:60px;">
+              <div class="col-lg-6 d-flex flex-row align-items-center" style="height:60px;">
                 <div class="mr-1">WPM:</div>
                 <div class="mr-1 color-accent font-weight-bold">200</div>
                 <div class="mr-1">
@@ -97,7 +97,9 @@
                 </div>
                 <div class="color-accent font-weight-bold">800</div>
               </div>
-              <div class="col-4 mx-2 d-flex flex-row align-items-center justify-content-center" style="height:60px;">
+            </div>
+            <div class="row">
+              <div class="col-5 mx-2 d-flex flex-row align-items-center justify-content-center" style="height:30px;">
                 <div class="">
                   <input type="checkbox" name="by-character" value="" id="char-by-char">
                 </div>
@@ -105,8 +107,16 @@
                   By&nbsp;Character
                 </div>
               </div>
+              <div class="col-5 mx-2 d-flex flex-row align-items-center justify-content-center" style="height:30px;">
+                <div class="">
+                  <input type="checkbox" name="control-momentum" value="" id="control-momentum">
+                </div>
+                <div class="ml-2">
+                  Control&nbsp;Momentum
+                </div>
+              </div>
             </div>
-            <div class="row">
+            <div class="row mt-3">
               <div class="col">
                 <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="start-rolling">Play</button>
                 <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="stop-rolling">Stop</button>
