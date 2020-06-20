@@ -53,14 +53,34 @@
     background-color: #F7F3E3;
   }
 
+  .textarea-full-width {
+    width: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+   }
+
 </style>
 
-<body class="color-accent-secondary-bg">
+<body class="color-accent-secondary-bg font-secondary color-text">
   <div class="container-fluid">
     <div class="row color-main-bg py-3 pl-3">
       <!-- navbar -->
       <div class="col display-4 font-main font-weight-bold">
           <span class="color-text">Fast</span><span class="color-secondary">Read</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-7 mx-2">
+          <div class="mt-5 my-3 px-3 py-3 border rounded border-light color-text color-main-bg">
+            Paste your text below and click on play to start rolling
+            the text.
+          </div>
+          <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 rounded" id="input-text" rows="15"></textarea>
+      </div>
+      <div class="col">
+
       </div>
     </div>
   </div>
