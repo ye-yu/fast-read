@@ -1,3 +1,5 @@
+Author: planc_
+
 - Introduction
 We live in a mysterious world, but we have adapted to do various stuffs to keep us alive. Trading is a tradition to keep us from having not enough resources or the capacity to satisfy one own needs and wants. Briefly, it is a fairly easy process. First, two parties, that is either an individual, a company, or simply an entity that can perform a valid trading, must exist where each of them has one or more items of interest of the opposite party. The process finalises after the exchanging of these items indicating that there exists a mutual agreement for this trade. Sometimes, a supporting party or platform can act as a witness to prevent cheats in between these two parties, which can be helpful to provide a sense of security in the trading process for both sides. This action introduces an economy system for limited resources in this world.
 
