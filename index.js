@@ -82,7 +82,7 @@ function init() {
   ENTRIES.BY_CHAR.source.on('input', calculateStatistics);
 
   // hide stop rolling button
-  BUTTONS.STOP.hide();
+  clickStopRolling();
 
   // display initial word per minute
   $("#wpm-display").html(ENTRIES.WPM.get());
@@ -137,6 +137,8 @@ function clickStartRolling() {
   GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
   BUTTONS.START.hide();
   BUTTONS.STOP.show();
+  ENTRIES.TEXT.source.hide();
+  HIGHLIGHTING.fadeIn(500);
 }
 
 function clearHighlightingContent() {
@@ -188,6 +190,8 @@ function scheduleWordToScreen(iterator, delay) {
 }
 
 function clickStopRolling() {
+  ENTRIES.TEXT.source.fadeIn(500);
+  HIGHLIGHTING.hide();
   BUTTONS.STOP.hide();
   BUTTONS.START.show();
   setScreenText();
