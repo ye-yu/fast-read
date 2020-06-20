@@ -79,11 +79,26 @@
             the text.
           </div>
           <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 my-3 rounded" id="input-text" rows="15"></textarea>
-          <div class="d-flex flex-lg-row flex-column">
-            <input class="mx-2 my-1" type="number" min="0" placeholder="Delay (secs): " name="" value="" id="delay">
-            <input class="mx-2 my-1" type="number" min="200" max="600" placeholder="Words per Minute: " name="" value="" id="wpm">
-            <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="start-rolling">Play</button>
-            <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="stop-rolling">Stop</button>
+          <div class="container-fluid text-center">
+            <div class="row">
+              <div class="col-lg-6">
+                Delay: <input class="mx-2 my-1 " type="number" min="0" placeholder="(in seconds)" name="" value="" id="delay">
+              </div>
+              <div class="col-lg-6 d-flex flex-row align-items-center">
+                <div class="mr-1">WPM:</div>
+                <div class="mr-1 color-accent font-weight-bold">200</div>
+                <div class="mr-1">
+                  <input class="mx-2 my-1" type="range" min="200" max="600" placeholder="Words per Minute: " name="rangeSlider" value="" id="wpm">
+                </div>
+                <div class="color-accent font-weight-bold">600</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="start-rolling">Play</button>
+                <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="stop-rolling">Stop</button>
+              </div>
+            </div>
           </div>
       </div>
       <div class="col my-5 mr-3 ml-lg-0 ml-3">

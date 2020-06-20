@@ -83,7 +83,7 @@ function clickStartRolling() {
   const refreshRate = Math.round((60 * 1000) / wpm);
   let iterator = iterate(ENTRIES.TEXT.get().trim().split(/\s+/));
   displayTimer(delay);
-  GLOB.screen = scheduleWordToScreen(iterator, delay);
+  GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
   BUTTONS.START.hide();
   BUTTONS.STOP.show();
 }
