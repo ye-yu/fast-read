@@ -82,25 +82,38 @@ function clickStartRolling() {
   const wpm = ENTRIES.WPM.getOrDefault();
   const refreshRate = Math.round((60 * 1000) / wpm);
   let iterator = iterate(ENTRIES.TEXT.get().trim().split(/\s+/));
+  displayTimer(delay);
+  GLOB.screen = scheduleWordToScreen(iterator, delay);
+  BUTTONS.START.hide();
+  BUTTONS.STOP.show();
+}
+
+function displayTimer(delay) {
+  if (delay == 0) return;
   setScreenText(delay);
   GLOB.timer = setInterval(() => {
     delay -= 1;
     setScreenText(delay);
     if (delay == 0) {
       clearInterval(GLOB.timer);
-      GLOB.timer = setInterval(() => {
-        let nextWord = iterator.next();
-        if (nextWord.done) {
-          clearInterval(GLOB.timer);
-        } else {
-          setScreenText(nextWord.value.element);
-        }
-      }, refreshRate)
       setScreenText();
     }
   }, 1000);
-  BUTTONS.START.hide();
-  BUTTONS.STOP.show();
+}
+
+function scheduleWordToScreen(iterator, delay) {
+  return setInterval(() => {
+    let nextWord = iterator.next();
+    if (nextWord.done) {
+      clearTimeout(GLOB.screen);
+    } else {
+      setScreenText(nextWord.value.element);
+      clearTimeout(GLOB.screen);
+      const wpm = ENTRIES.WPM.getOrDefault();
+      const refreshRate = Math.round((60 * 1000) / wpm);
+      GLOB.screen = scheduleWordToScreen(iterator, refreshRate);
+    }
+  }, delay);
 }
 
 function clickStopRolling() {
@@ -108,6 +121,7 @@ function clickStopRolling() {
   BUTTONS.START.show();
   setScreenText();
   clearInterval(GLOB.timer);
+  clearTimeout(GLOB.screen);
 }
 
 /*
