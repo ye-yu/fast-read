@@ -64,6 +64,19 @@
     box-sizing: border-box;         /* Opera/IE 8+ */
    }
 
+   a {
+     color: #AF9164;
+   }
+
+   a:visited {
+     color: #D5C6AE;
+   }
+
+   a:hover {
+     color: #D5C6AE !important;
+   }
+
+
 </style>
 
 <body class="color-accent-secondary-bg font-secondary color-text">
@@ -72,8 +85,16 @@
   <div class="container-fluid">
     <div class="row color-main-bg py-3 pl-3">
       <!-- navbar -->
-      <div class="col display-4 font-main font-weight-bold">
-          <span class="color-text">Fast</span><span class="color-secondary">Read</span>
+      <div class="col font-main font-weight-bold d-flex flex-lg-row flex-column align-items-center">
+        <div class="mx-auto ml-lg-0 pl-lg-5 mr-lg-auto">
+          <span class="display-4 color-text">Fast</span><span class="display-4 color-secondary">Read</span><small class="ml-1">(v1.0)</small>
+        </div>
+        <div class="mx-3">
+          <button class="btn btn-dark mr-lg-2" type="button" name="button" onclick="window.location='https://github.com/ye-yu/fast-read'">Source</button>
+          <button class="btn btn-dark mr-lg-5" type="button" name="button" onclick="window.location='https://github.com/ye-yu/fast-read/blob/master/README.md'">How to Use?</button>
+        </div>
+
+
       </div>
     </div>
 
