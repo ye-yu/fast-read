@@ -67,9 +67,15 @@ function init() {
   // register event handlers
   BUTTONS.START.on('click', clickStartRolling);
   BUTTONS.STOP.on('click', clickStopRolling);
+  ENTRIES.WPM.source.on('input', () => {
+    $("#wpm-display").html(ENTRIES.WPM.get());
+  });
 
   // hide stop rolling button
   BUTTONS.STOP.hide();
+
+  // display initial word per minute
+  $("#wpm-display").html(ENTRIES.WPM.get());
 }
 
 function setScreenText(text = "") {
