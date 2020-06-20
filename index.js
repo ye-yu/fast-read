@@ -200,6 +200,9 @@ function scheduleWordToScreen(iterator, delay) {
 function highlightText(index) {
   $(".highlight").attr("class", "");
   $(`#word-${index}`).addClass("highlight color-accent");
+  $(`#word-${index}`).attr("style", "margin-top:-40px;padding-top:40px;");
+  window.location.hash = `word-${index}`;
+
 }
 
 function clickStopRolling() {
