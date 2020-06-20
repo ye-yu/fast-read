@@ -35,8 +35,12 @@ class IntInput extends TextInput{
 }
 
 function* iterate(arr) {
+  let count = 0;
   for(let i of arr) {
-    yield i;
+    yield {
+      index: count,
+      element: i
+    };
   }
 }
 
@@ -89,7 +93,7 @@ function clickStartRolling() {
         if (nextWord.done) {
           clearInterval(GLOB.timer);
         } else {
-          setScreenText(nextWord.value);
+          setScreenText(nextWord.value.element);
         }
       }, refreshRate)
       setScreenText();
