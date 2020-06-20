@@ -73,11 +73,17 @@
 
     <div class="row">
       <div class="col-lg-7 mx-2">
-          <div class="mt-5 my-3 px-3 py-3 border rounded border-light color-text color-main-bg">
+          <div class="mt-5 mt-3 px-3 py-3 border rounded border-light color-text color-main-bg">
             Paste your text below and click on play to start rolling
             the text.
           </div>
-          <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 rounded" id="input-text" rows="15"></textarea>
+          <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 my-3 rounded" id="input-text" rows="15"></textarea>
+          <div class="d-flex flex-col">
+            <input class="mx-2" type="number" min="0" placeholder="Delay (secs): " name="" value="">
+            <input class="mx-2" type="number" min="200" max="600" placeholder="Words per Minute: " name="" value="">
+            <button class="btn btn-dark ml-auto px-5" type="button" id="start-rolling">Play</button>
+            <button class="btn btn-dark ml-auto px-5" type="button" id="stop-rolling">Stop</button>
+          </div>
       </div>
       <div class="col">
 
