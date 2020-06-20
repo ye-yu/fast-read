@@ -215,6 +215,7 @@ function clickStopRolling() {
   setScreenText();
   clearInterval(GLOB.timer);
   clearTimeout(GLOB.screen);
+  window.location.hash = "";
 }
 
 function clickPauseRolling() {
