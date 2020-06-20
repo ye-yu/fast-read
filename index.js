@@ -87,7 +87,12 @@ function clickStartRolling() {
   let delay = ENTRIES.DELAY.getOrDefault();
   const wpm = ENTRIES.WPM.getOrDefault();
   const refreshRate = Math.round((60 * 1000) / wpm);
-  let iterator = iterate(ENTRIES.TEXT.get().trim().split(/\s+/));
+  let iterator;
+  if ($("#char-by-char").is(":checked")) {
+    iterator = iterate(ENTRIES.TEXT.get().trim().split(""));
+  } else {
+    iterator = iterate(ENTRIES.TEXT.get().trim().split(/\s+/));
+  }
   displayTimer(delay);
   GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
   BUTTONS.START.hide();

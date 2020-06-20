@@ -81,16 +81,29 @@
           <textarea class="textarea-full-width color-main-bg color-text px-3 py-3 my-3 rounded" id="input-text" rows="15"></textarea>
           <div class="container-fluid text-center">
             <div class="row">
-              <div class="col-lg-6">
-                Delay: <input class="mx-2 my-1 " type="number" min="0" placeholder="(in seconds)" name="" value="" id="delay">
+              <div class="col-lg-4 d-flex flex-row align-items-center">
+                <div class="">
+                  Delay:
+                </div>
+                <div class="">
+                  <input class="mx-2 my-1" type="number" min="0" placeholder="(in seconds)" name="" value="" id="delay">
+                </div>
               </div>
-              <div class="col-lg-6 d-flex flex-row align-items-center">
+              <div class="col-lg-4 d-flex flex-row align-items-center">
                 <div class="mr-1">WPM:</div>
                 <div class="mr-1 color-accent font-weight-bold">200</div>
                 <div class="mr-1">
                   <input class="mx-2 my-1" type="range" min="200" max="600" placeholder="Words per Minute: " name="rangeSlider" value="" id="wpm">
                 </div>
                 <div class="color-accent font-weight-bold">600</div>
+              </div>
+              <div class="col-4 d-flex flex-row align-items-center justify-content-center">
+                <div class="">
+                  <input type="checkbox" name="by-character" value="" id="char-by-char">
+                </div>
+                <div class="ml-2">
+                  By&nbsp;Character
+                </div>
               </div>
             </div>
             <div class="row">
