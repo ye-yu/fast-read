@@ -105,7 +105,8 @@ function calculateStatistics() {
   $("#time-completion").html(`${Math.round(wordCount / wpm * 60)}s`);
 }
 
-function setScreenText(text = "") {
+function setScreenText(text = "&nbsp;") {
+  if (text.length == 0) return;
   $("#screen").html(text);
 }
 
