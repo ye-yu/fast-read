@@ -1,26 +1,28 @@
 "use strict";
 
-const START_ROLLING = $("#start-rolling");
-const STOP_ROLLING = $("#stop-rolling");
+const BUTTONS = {
+  START: $("#start-rolling"),
+  STOP: $("#stop-rolling")
+}
 function init() {
   // register event handlers
-  START_ROLLING.on('click', clickStartRolling);
-  STOP_ROLLING.on('click', clickStopRolling);
+  BUTTONS.START.on('click', clickStartRolling);
+  BUTTONS.STOP.on('click', clickStopRolling);
 
   // hide stop rolling button
-  STOP_ROLLING.hide();
+  BUTTONS.STOP.hide();
 }
 
 function clickStartRolling() {
   console.log("Start rolling texts");
-  START_ROLLING.hide();
-  STOP_ROLLING.show();
+  BUTTONS.START.hide();
+  BUTTONS.STOP.show();
 }
 
 function clickStopRolling() {
   console.log("Stop rolling texts");
-  STOP_ROLLING.hide();
-  START_ROLLING.show();
+  BUTTONS.STOP.hide();
+  BUTTONS.START.show();
 }
 
 
