@@ -63,7 +63,9 @@ const ENTRIES = {
   CTRL_MOMENTUM: new BooleanInput($("#control-momentum")),
 }
 
-const GLOB = {}
+const GLOB = {};
+
+const HIGHLIGHTING = $("#highlighting");
 
 /*
 Functions
@@ -110,7 +112,7 @@ function* iterate(arr) {
   let count = 0;
   for(let i of arr) {
     yield {
-      index: count,
+      index: count++,
       element: i,
     };
   }
@@ -121,16 +123,32 @@ function clickStartRolling() {
   let delay = ENTRIES.DELAY.getOrDefault();
   const wpm = ENTRIES.WPM.getOrDefault();
   const refreshRate = Math.round((60 * 1000) / wpm);
+  let split;
   let iterator;
   if ($("#char-by-char").is(":checked")) {
-    iterator = iterate(ENTRIES.TEXT.get().trim().split(""));
+    split = ENTRIES.TEXT.get().trim().split("");
   } else {
-    iterator = iterate(ENTRIES.TEXT.get().trim().split(/(\s+)/g));
+    split = ENTRIES.TEXT.get().trim().split(/(\s+)/g);
   }
+  iterator = iterate(split);
+  clearHighlightingContent();
+  appendToHighlighting(split);
   displayTimer(delay);
   GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
   BUTTONS.START.hide();
   BUTTONS.STOP.show();
+}
+
+function clearHighlightingContent() {
+  HIGHLIGHTING.empty();
+}
+
+function appendToHighlighting(split) {
+  for (let {index, element} of iterate(split)) {
+    element = element.replace(/\s/g, "<br>");
+    let word = `<span id="word-${index}">${element}</span>`;
+    HIGHLIGHTING.append(word);
+  }
 }
 
 function displayTimer(delay) {
