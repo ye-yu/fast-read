@@ -52,6 +52,8 @@ Constants
 */
 const BUTTONS = {
   START: $("#start-rolling"),
+  PAUSE: $("#pause-rolling"),
+  CONTINUE: $("#continue-rolling"),
   STOP: $("#stop-rolling")
 }
 
@@ -74,6 +76,8 @@ function init() {
   // register event handlers
   BUTTONS.START.on('click', clickStartRolling);
   BUTTONS.STOP.on('click', clickStopRolling);
+  BUTTONS.PAUSE.on('click', clickPauseRolling);
+  BUTTONS.CONTINUE.on('click', clickContinueRolling);
   ENTRIES.WPM.source.on('input', () => {
     $("#wpm-display").html(ENTRIES.WPM.get());
     calculateStatistics();
@@ -136,7 +140,8 @@ function clickStartRolling() {
   displayTimer(delay);
   GLOB.screen = scheduleWordToScreen(iterator, delay * 1000 + 10);
   BUTTONS.START.hide();
-  BUTTONS.STOP.show();
+  BUTTONS.PAUSE.fadeIn(200);
+  BUTTONS.STOP.fadeIn(200);
   ENTRIES.TEXT.source.hide();
   HIGHLIGHTING.fadeIn(500);
 }
@@ -192,11 +197,23 @@ function scheduleWordToScreen(iterator, delay) {
 function clickStopRolling() {
   ENTRIES.TEXT.source.fadeIn(500);
   HIGHLIGHTING.hide();
+  BUTTONS.PAUSE.hide();
+  BUTTONS.CONTINUE.hide();
   BUTTONS.STOP.hide();
-  BUTTONS.START.show();
+  BUTTONS.START.fadeIn(200);
   setScreenText();
   clearInterval(GLOB.timer);
   clearTimeout(GLOB.screen);
+}
+
+function clickPauseRolling() {
+  BUTTONS.PAUSE.hide();
+  BUTTONS.CONTINUE.show();
+}
+
+function clickContinueRolling() {
+  BUTTONS.PAUSE.show();
+  BUTTONS.CONTINUE.hide();
 }
 
 /*
