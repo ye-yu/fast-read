@@ -4,16 +4,26 @@ Classes
 */
 class TextInput {
   constructor(source, defValue, isTextArea) {
-    if (isTextArea){
-      this.getValue = () => source.html();
-    } else {
-      this.getValue = () => source.val();
-    }
     this.def = defValue;
+    this.source = source;
+    this.isTextArea = isTextArea;
   }
+
+  get() {
+    if (this.isTextArea) {
+      return this.source.html();
+    }
+    return this.source.val();
+  }
+
   getOrDefault() {
-    const val = this.getValue();
-    if (val.length == 0) return def;
+    let val = this.get();
+    if (val.length == 0) val = def;
+    if (this.isTextArea) {
+      this.source.html(val);
+    } else {
+      this.source.val(val);
+    }
     return val;
   }
 }
@@ -24,8 +34,13 @@ class IntInput extends TextInput{
   }
 
   getOrDefault() {
-    const val = this.getValue();
-    if (val.length == 0 || Number.isNaN(val)) return +this.def;
+    let val = this.get();
+    if (val.length == 0 || Number.isNaN(val)) val = this.def;
+    if (this.isTextArea) {
+      this.source.html(val);
+    } else {
+      this.source.val(val);
+    }
     return +val;
   }
 }
