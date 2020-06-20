@@ -54,7 +54,7 @@ const BUTTONS = {
 
 const ENTRIES = {
   TEXT: new TextInput($("#input-text"), ""),
-  DELAY: new IntInput($("#delay"), "5"),
+  DELAY: new IntInput($("#delay"), "0"),
   WPM: new IntInput($("#wpm"), "200")
 }
 
