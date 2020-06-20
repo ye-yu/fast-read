@@ -4,26 +4,19 @@ Classes
 */
 class TextInput {
   constructor(source, defValue, isTextArea) {
-    this.def = defValue;
     this.source = source;
+    this.def = defValue;
     this.isTextArea = isTextArea;
   }
 
   get() {
-    if (this.isTextArea) {
-      return this.source.html();
-    }
     return this.source.val();
   }
 
-  getOrDefault() {
+  getOrDefault(defVal = this.def) {
     let val = this.get();
-    if (val.length == 0) val = def;
-    if (this.isTextArea) {
-      this.source.html(val);
-    } else {
-      this.source.val(val);
-    }
+    if (val.length == 0) val = defVal;
+    this.source.val(val);
     return val;
   }
 }
@@ -33,14 +26,10 @@ class IntInput extends TextInput{
     super(source, defValue, isTextArea);
   }
 
-  getOrDefault() {
+  getOrDefault(defVal = this.def) {
     let val = this.get();
-    if (val.length == 0 || Number.isNaN(val)) val = this.def;
-    if (this.isTextArea) {
-      this.source.html(val);
-    } else {
-      this.source.val(val);
-    }
+    if (val.length == 0 || Number.isNaN(val)) val = defVal;
+    this.source.val(val);
     return +val;
   }
 }
@@ -54,10 +43,12 @@ const BUTTONS = {
 }
 
 const ENTRIES = {
-  TEXT: new TextInput($("#input-text"), "", true),
-  DELAY: new IntInput($("#delay"), "5", false),
-  WPM: new IntInput($("#wpm"), "200", false)
+  TEXT: new TextInput($("#input-text"), ""),
+  DELAY: new IntInput($("#delay"), "5"),
+  WPM: new IntInput($("#wpm"), "200")
 }
+
+const GLOB = {}
 
 /*
 Functions
@@ -72,9 +63,10 @@ function init() {
 }
 
 function clickStartRolling() {
+  if (ENTRIES.TEXT.get().length == 0) return;
   console.log("Delay before start: ", ENTRIES.DELAY.getOrDefault());
   console.log("Words per minute: ", ENTRIES.WPM.getOrDefault());
-  console.log("Text to play: ", ENTRIES.TEXT.getValue());
+  console.log("Text to play: ", ENTRIES.TEXT.get());
   BUTTONS.START.hide();
   BUTTONS.STOP.show();
 }
