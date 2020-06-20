@@ -62,11 +62,26 @@ function init() {
   BUTTONS.STOP.hide();
 }
 
+function setScreenText(text = "") {
+  $("#screen").html(text);
+}
+
 function clickStartRolling() {
   if (ENTRIES.TEXT.get().length == 0) return;
   console.log("Delay before start: ", ENTRIES.DELAY.getOrDefault());
   console.log("Words per minute: ", ENTRIES.WPM.getOrDefault());
   console.log("Text to play: ", ENTRIES.TEXT.get());
+
+  let delay = ENTRIES.DELAY.getOrDefault();
+  setScreenText(delay);
+  GLOB.timer = setInterval(() => {
+    delay -= 1;
+    setScreenText(delay);
+    if (delay == 0) {
+      clearInterval(GLOB.timer);
+      setScreenText();
+    }
+  }, 1000);
   BUTTONS.START.hide();
   BUTTONS.STOP.show();
 }
