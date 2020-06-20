@@ -95,7 +95,8 @@ function init() {
 
   GLOB.pauseSymbols = [
     ".", "!", ",", "?", ";", ":", // roman symbols
-    "。", "！", "，", "？", "；", "：" // full-width symbols
+    "。", "！", "，", "？", "；", "：", // full-width symbols
+    "、" // japanese comma
   ];
 }
 
