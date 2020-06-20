@@ -186,12 +186,18 @@ function scheduleWordToScreen(iterator, delay) {
       clearTimeout(GLOB.screen);
     } else {
       setScreenText(nextWord.value.element);
+      highlightText(nextWord.value.index);
       clearTimeout(GLOB.screen);
       const wpm = ENTRIES.WPM.getOrDefault();
       const refreshRate = Math.round((60 * 1000) / wpm);
       GLOB.screen = scheduleWordToScreen(iterator, refreshRate + (addMomentum ? refreshRate : 0));
     }
   }, delay);
+}
+
+function highlightText(index) {
+  $(".highlight").attr("class", "");
+  $(`#word-${index}`).addClass("highlight color-accent");
 }
 
 function clickStopRolling() {
