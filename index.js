@@ -83,7 +83,10 @@ function init() {
     calculateStatistics();
   });
   ENTRIES.TEXT.source.on('input', calculateStatistics);
-  ENTRIES.BY_CHAR.source.on('input', calculateStatistics);
+  ENTRIES.BY_CHAR.source.on('input', () => {
+    calculateStatistics();
+    adjustScreenTextXFromByChar();
+  });
 
   // hide stop rolling button
   clickStopRolling();
@@ -111,6 +114,20 @@ function adjustScreenTextX(center, offset = 0) {
   $("svg#screen-svg text#center").attr("x", center);
   $("svg#screen-svg text#right").attr("x", center + fontHalfWidth);
 }
+
+function adjustScreenTextXFromByChar() {
+  const whiteText = "#F7F3E3";
+  const secondaryText = "#D52941";
+  const screenWidth = $("svg#screen-svg").width();
+  if (!ENTRIES.BY_CHAR.get()) {
+    adjustScreenTextX(screenWidth/2, 50);
+    $("svg#screen-svg text#center").attr("fill", secondaryText);
+  } else {
+    adjustScreenTextX(screenWidth/2);
+    $("svg#screen-svg text#center").attr("fill", whiteText);
+  }
+}
+
 
 function calculateStatistics() {
   const wpm = ENTRIES.WPM.getOrDefault();
@@ -152,7 +169,6 @@ function findVowelNonHead(text = "") {
 
 function setScreenText(text = "") {
   if (text.length == 0) return;
-  // $("#screen").html(text);
   text = separateComponents(text);
   $("svg#screen-svg text#left").empty(); // to clear out span tags
   $("svg#screen-svg text#left").html(text[0]);
