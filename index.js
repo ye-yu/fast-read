@@ -202,8 +202,8 @@ function highlightText(index) {
   $(".highlight").attr("class", "");
   $(`#word-${index}`).addClass("highlight color-accent");
   $(`#word-${index}`).attr("style", "margin-top:-40px;padding-top:40px;");
-  window.location.hash = `word-${index}`;
-
+  document.getElementById(`word-${index}`).scrollIntoView(true);
+  console.log(`Word scroll height ${$(`#word-${index}`).prop('scrollHeight')}`);
 }
 
 function clickStopRolling() {
@@ -216,7 +216,6 @@ function clickStopRolling() {
   setScreenText();
   clearInterval(GLOB.timer);
   clearTimeout(GLOB.screen);
-  window.location.hash = "";
 }
 
 function clickPauseRolling() {
