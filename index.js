@@ -101,10 +101,11 @@ function init() {
 
   // adjust screen width
   const screenWidth = $("svg#screen-svg").width();
-  adjustScreenTextX(screenWidth/2);
+  adjustScreenTextX(screenWidth/2, 50);
 }
 
-function adjustScreenTextX(center) {
+function adjustScreenTextX(center, offset = 0) {
+  center -= offset;
   const fontHalfWidth = 15;
   $("svg#screen-svg text#left").attr("x", center - fontHalfWidth);
   $("svg#screen-svg text#center").attr("x", center);
@@ -119,9 +120,46 @@ function calculateStatistics() {
   $("#time-completion").html(`${Math.round(wordCount / wpm * 60)}s`);
 }
 
-function setScreenText(text = "&nbsp;") {
+function separateComponents(text = "") {
+  if (text.length < 2) {
+    return ["", text, ""];
+  }
+
+  if (text.length == 2) {
+    const valid = "aeuioy".split("");
+    if (valid.indexOf(text[0]) > -1)
+      return ["", text[0], text[1]];
+    return [text[0], text[1], ""];
+  }
+  const middle = findVowelNonHead(text);
+
+  return [
+    text.substring(0, middle),
+    text[middle],
+    text.substring(middle + 1)
+  ];
+}
+
+function findVowelNonHead(text = "") {
+  const valid = "aeuioy".split("");
+  for(let v of iterate(text.split(""))) {
+    if (v.index == 0 || v.index == text.length - 1) continue;
+    if (valid.indexOf(v.element) > -1) return v.index;
+  }
+  if (valid.indexOf(text[0]) > -1) return 0;
+  return Math.floor(text.length / 2);
+}
+
+function setScreenText(text = "") {
   if (text.length == 0) return;
-  $("#screen").html(text);
+  // $("#screen").html(text);
+  text = separateComponents(text);
+  $("svg#screen-svg text#left").empty(); // to clear out span tags
+  $("svg#screen-svg text#left").html(text[0]);
+  $("svg#screen-svg text#center").empty(); // to clear out span tags
+  $("svg#screen-svg text#center").html(text[1]);
+  $("svg#screen-svg text#right").empty(); // to clear out span tags
+  $("svg#screen-svg text#right").html(text[2]);
 }
 
 function* iterate(arr) {
