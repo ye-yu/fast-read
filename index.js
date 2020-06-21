@@ -167,7 +167,7 @@ function findVowelNonHead(text = "") {
   return Math.floor(text.length / 2);
 }
 
-function setScreenText(text = "") {
+function setScreenText(text = " ") {
   if (text.length == 0) return;
   text = separateComponents(text);
   $("svg#screen-svg text#left").empty(); // to clear out span tags
