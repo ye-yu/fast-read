@@ -84,6 +84,10 @@ function init() {
   });
   ENTRIES.TEXT.source.on('input', calculateStatistics);
   ENTRIES.BY_CHAR.source.on('input', () => {
+    if (GLOB.startPlaying) {
+      ENTRIES.BY_CHAR.source.prop("checked", !ENTRIES.BY_CHAR.get());
+      return;
+    }
     calculateStatistics();
     adjustScreenTextXFromByChar();
   });
@@ -211,6 +215,7 @@ function clickStartRolling() {
   BUTTONS.STOP.fadeIn(200);
   ENTRIES.TEXT.source.hide();
   HIGHLIGHTING.fadeIn(500);
+  GLOB.startPlaying = true;
 }
 
 function clearHighlightingContent() {
@@ -282,6 +287,7 @@ function clickStopRolling() {
   setScreenText();
   clearInterval(GLOB.timer);
   clearTimeout(GLOB.screen);
+  GLOB.startPlaying = false;
 }
 
 function clickPauseRolling() {
