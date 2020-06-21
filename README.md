@@ -4,6 +4,20 @@ A web interface to fast-read texts.
 ## Where to use
 The page is statically hosted using GitHub Pages at [https://ye-yu.github.io/fast-read][1]. This page is mobile-friendly and can be used offline either as downloaded or browser-cached.
 
+## Comparisons
+| (Features) | FastRead | [Readsy][3] | [Spreedr][2] |
+|--------|---------|---|---|
+| WPM Control | 200 - 800 | 200 - 400 | Unlimited  |
+| Momentum Control | Toggle | Yes | None |
+| Offline | Yes | Yes | No |
+| By-character Support | Yes | No | No |
+| Word Highlighting | Yes | No | No |
+| URL Import | No(t yet) | Yes | From App |
+| ORP | No(t yet) | Yes | No |
+| Commercialised | No | Yes | Yes |
+
+It seems like at the moment, Readsy (that is using Spritz API) has the higher similarity with FastRead and a wider range of feature although lacking of by-character support. However, FastRead will remain uncommercialised and open source.
+
 ## How to use
 When loading the page, you will be presented with a large text area, a group of inputs below it, and a blank box on the right of your widescreen or at the bottom of your mobile screen.
 
@@ -53,3 +67,5 @@ Click this button to pause or stop the rolling of the text.
 
 
 [1]: https://ye-yu.github.io/fast-read
+[2]: https://www.spreeder.com/app.php
+[3]: http://www.readsy.co/
