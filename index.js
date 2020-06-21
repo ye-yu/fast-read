@@ -107,8 +107,7 @@ function init() {
   ];
 
   // adjust screen width
-  const screenWidth = $("svg#screen-svg").width();
-  adjustScreenTextX(screenWidth/2, 50);
+  adjustScreenTextXFromByChar();
 }
 
 function adjustScreenTextX(center, offset = 0) {
