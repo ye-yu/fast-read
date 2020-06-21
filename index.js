@@ -172,6 +172,7 @@ function findVowelNonHead(text = "") {
 }
 
 function setScreenText(text = " ") {
+  text += "";
   if (text.length == 0) return;
   text = separateComponents(text);
   $("svg#screen-svg text#left").empty(); // to clear out span tags
@@ -246,6 +247,10 @@ function displayTimer(delay) {
 function scheduleWordToScreen(iterator, delay) {
   let addMomentum = false;
   let nextWord = iterator.next();
+  if (nextWord.done) {
+    clearTimeout(GLOB.screen);
+    return -1;
+  }
   while(nextWord.value.element.trim().length == 0) {
     nextWord = iterator.next();
     addMomentum = ENTRIES.CTRL_MOMENTUM.get() && nextWord.value.element.indexOf("\n") > -1;
