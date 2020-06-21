@@ -98,6 +98,17 @@ function init() {
     "。", "！", "，", "？", "；", "：", // full-width symbols
     "、" // japanese comma
   ];
+
+  // adjust screen width
+  const screenWidth = $("svg#screen-svg").width();
+  adjustScreenTextX(screenWidth/2);
+}
+
+function adjustScreenTextX(center) {
+  const fontHalfWidth = 15;
+  $("svg#screen-svg text#left").attr("x", center - fontHalfWidth);
+  $("svg#screen-svg text#center").attr("x", center);
+  $("svg#screen-svg text#right").attr("x", center + fontHalfWidth);
 }
 
 function calculateStatistics() {
