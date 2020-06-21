@@ -105,7 +105,7 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-6 mx-2">
+      <div class="col-lg-5 mx-2">
           <div class="mt-5 mt-3 px-4 py-3 rounded color-text color-main-bg">
             <svg class="bi bi-exclamation" width="1.8em" height="1.8em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
@@ -113,58 +113,12 @@
             Paste your text below and click on play to start rolling
             the text.
           </div>
-          <textarea placeholder="Enter your text here." class="textarea-full-width bg-dark color-text px-3 py-3 my-3 border-0 rounded" id="input-text" rows="12"></textarea>
-          <div class="w-100 color-text px-3 py-3 my-3 smooth-scrolling" id="highlighting" style="height: 300px; overflow-y:auto;">
-          </div>
-          <div class="container-fluid text-center">
-            <div class="row">
-              <div class="col-lg-6 d-flex flex-row align-items-center" style="height:60px;">
-                <div class="">
-                  Delay:
-                </div>
-                <div class="">
-                  <input class="mx-2 my-1" type="number" min="0" placeholder="(in seconds)" name="" value="" id="delay">
-                </div>
-              </div>
-              <div class="col-lg-6 d-flex flex-row align-items-center" style="height:60px;">
-                <div class="mr-1">WPM:</div>
-                <div class="mr-1 color-accent font-weight-bold">200</div>
-                <div class="mr-1">
-                  <input class="mx-2 my-1" type="range" min="200" max="800" step="10" placeholder="Words per Minute: " name="rangeSlider" value="" id="wpm">
-                </div>
-                <div class="color-accent font-weight-bold">800</div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-5 mx-2 d-flex flex-row align-items-center justify-content-center" style="height:30px;">
-                <div class="">
-                  <input type="checkbox" name="by-character" value="" id="char-by-char">
-                </div>
-                <div class="ml-2">
-                  By&nbsp;Character
-                </div>
-              </div>
-              <div class="col-5 mx-2 d-flex flex-row align-items-center justify-content-center" style="height:30px;">
-                <div class="">
-                  <input type="checkbox" name="control-momentum" value="" id="control-momentum">
-                </div>
-                <div class="ml-2">
-                  Control&nbsp;Momentum
-                </div>
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col">
-                <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="start-rolling">Play</button>
-                <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="pause-rolling">Pause</button>
-                <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="continue-rolling">Continue</button>
-                <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="stop-rolling">Stop</button>
-              </div>
-            </div>
+          <textarea placeholder="Enter your text here." class="textarea-full-width bg-dark color-text px-3 py-3 my-3 border-0 rounded" id="input-text" rows="22"></textarea>
+          <div class="w-100 color-text px-3 py-3 my-3 smooth-scrolling" id="highlighting" style="height: 500px; overflow-y:auto;">
           </div>
       </div>
-      <div class="col my-5 mr-3 ml-lg-0 ml-3">
-        <div class="d-flex flex-row align-items-center screen bg-dark rounded w-100 text-center">
+      <div class="col mt-lg-5 mb-5 mr-3 ml-lg-0 ml-3 d-flex flex-lg-column flex-column-reverse">
+        <div class="d-flex flex-column align-items-center screen bg-dark rounded w-100 text-center">
           <svg class="mx-auto" id="screen-svg" height="300px" width="100%">
             <!-- Left text -->
             <text x="0" y="175px" text-anchor="end" id="left" fill="#F7F3E3"></text>
@@ -173,12 +127,61 @@
             <!-- Right text -->
             <text x="0" y="175px" text-anchor="start" id="right" fill="#F7F3E3"></text>
           </svg>
+          <div class="text-center h5 mt-4">
+            <span id="wpm-display" class="color-accent font-weight-bold"></span> Words Per Minute
+          </div>
+          <div class="text-center h5 mt-2">
+            Estimated Finishing Time: <span id="time-completion" class="color-accent font-weight-bold"></span>
+          </div>
         </div>
-        <div class="text-center h5 mt-4">
-          <span id="wpm-display" class="color-accent font-weight-bold"></span> Words Per Minute
+        <div class="">
+          <hr>
         </div>
-        <div class="text-center h5 mt-2">
-          Estimated Finishing Time: <span id="time-completion" class="color-accent font-weight-bold"></span>
+        <div class="container-fluid">
+          <div class="row px-lg-5">
+            <div class="col-lg-6 d-flex flex-row align-items-center" style="height:60px;">
+              <div class="">
+                Delay:
+              </div>
+              <div class="">
+                <input class="mx-2 my-1 px-2" type="number" min="0" placeholder="(in seconds)" name="" value="" id="delay">
+              </div>
+              </div>
+            <div class="col-lg-6 d-flex flex-row align-items-center" style="height:60px;">
+              <div class="mr-1">WPM:</div>
+              <div class="mr-1 color-accent font-weight-bold">200</div>
+              <div class="mr-1">
+                <input class="mx-2 my-1" type="range" min="200" max="800" step="10" placeholder="Words per Minute: " name="rangeSlider" value="" id="wpm">
+              </div>
+              <div class="color-accent font-weight-bold">800</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6 px-2 d-flex flex-row align-items-center justify-content-center pt-3">
+              <div class="">
+                <input type="checkbox" name="by-character" value="" id="char-by-char">
+              </div>
+              <div class="ml-2">
+                By&nbsp;Character
+              </div>
+            </div>
+            <div class="col-lg-6 px-2 d-flex flex-row align-items-center justify-content-center pt-3">
+              <div class="">
+                <input type="checkbox" name="control-momentum" value="" id="control-momentum">
+              </div>
+              <div class="ml-2">
+                Control&nbsp;Momentum
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3 text-center">
+            <div class="col">
+              <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="start-rolling">Play</button>
+              <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="pause-rolling">Pause</button>
+              <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="continue-rolling">Continue</button>
+              <button class="btn btn-dark ml-auto mr-2 my-1 px-5" type="button" id="stop-rolling">Stop</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
