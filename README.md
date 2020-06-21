@@ -16,7 +16,9 @@ The page is statically hosted using GitHub Pages at [https://ye-yu.github.io/fas
 | ORP | No(t yet) | Yes | No |
 | Commercialised | No | Yes | Yes |
 
-It seems like at the moment, Readsy (that is using Spritz API) has the higher similarity with FastRead and a wider range of feature although lacking of by-character support. However, FastRead will remain uncommercialised and open source.
+It seems like at the moment, Readsy (that is using Spritz API) has the higher similarity with FastRead and a wider range of feature although lacking of by-character support.
+This does not support languages like Mandarin in their reading application unlike FastRead.
+Plus, FastRead will remain uncommercialised and open source.
 
 ## How to use
 When loading the page, you will be presented with a large text area, a group of inputs below it, and a blank box on the right of your widescreen or at the bottom of your mobile screen.
