@@ -12,8 +12,8 @@ The page is statically hosted using GitHub Pages at [https://ye-yu.github.io/fas
 | Offline | Yes | Yes | No |
 | By-character Support | Yes | No | No |
 | Word Highlighting | Yes | No | No |
+| ORP | Yes | Yes | No |
 | URL Import | No(t yet) | Yes | From App |
-| ORP | No(t yet) | Yes | No |
 | Commercialised | No | Yes | Yes |
 
 It seems like at the moment, Readsy (that is using Spritz API) has the higher similarity with FastRead and a wider range of feature although lacking of by-character support.
@@ -63,6 +63,8 @@ Click this button to pause or stop the rolling of the text.
 
 
 ### Releases
+* **v1.1**: Updated UI layout. Wider reading screen. ORP feature added.
+
 * **v1.0**: This is the first version of fast reading. Basic features includes:
   - Delay, WPM, character toggle, momentum controlling, and play-pause-stop animation.
   - Offline use either browser-cached or as downloaded
