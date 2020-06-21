@@ -267,8 +267,9 @@ function highlightText(index) {
   $(".highlight").attr("class", "");
   $(`#word-${index}`).addClass("highlight color-accent");
   $(`#word-${index}`).attr("style", "margin-top:-40px;padding-top:40px;");
+  let position = $(window).scrollTop();
   document.getElementById(`word-${index}`).scrollIntoView(true);
-  console.log(`Word scroll height ${$(`#word-${index}`).prop('scrollHeight')}`);
+  $(window).scrollTop(position);
 }
 
 function clickStopRolling() {
